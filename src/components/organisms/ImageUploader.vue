@@ -45,8 +45,27 @@ export default defineComponent({
       images.value.splice(index, 1);
     };
 
-    const uploadImages = () => {
-      // Logic to upload images
+    const uploadImages = async () => {
+      try {
+        // sending the images as FormData
+        const formData = new FormData();
+        images.value.forEach((image, index) => {
+          formData.append(`images[${index}]`, image.file, image.file.name);
+        });
+
+        // Update the URL with API endpoint
+        const response = await fetch('https://httpbin.org/anything', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        // Handle the response data
+        console.log(result);
+      } catch (error) {
+        // Handle any errors, such as by displaying a user-friendly message
+        console.error('Upload failed:', error);
+      }
     };
 
 
