@@ -151,36 +151,10 @@ export default defineComponent({
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin: 0 auto;
   padding: 10px;
 }
 .icon {
   width: 15px;
   padding-right: 5px;
-}
-input[type="file"] {
-  display: none;
-}
-.custom-file-upload {
-  width: 140px;
-  display: flex;
-  justify-content: center;
-  padding: 2px 6px;
-  cursor: pointer;
-  font-size: 0.8em;
-  border-radius: 4px;
-  border: 2px solid #a5a5a5;
-  background-color: #e3e3e3;
-  margin: 20px;
-}
-
-.upload-btn {
-  width: 50%;
-  align-self: center;
-  height: 35px;
-  color: white;
-  background-color: #05d5ac;
-  border: none;
-  margin-top: 35px;
 }
 </style>
