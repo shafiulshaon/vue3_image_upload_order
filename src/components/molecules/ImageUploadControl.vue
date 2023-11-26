@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import ImagePreview from '../atoms/ImagePreview.vue';
+import {defineComponent} from 'vue';
+import ImagePreview from '@/components/atoms/ImagePreview.vue';
 
 export default defineComponent({
   components: {

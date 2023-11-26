@@ -17,7 +17,7 @@
 
 <script>
 import {ref, defineComponent, onBeforeUnmount} from 'vue';
-import ImageUploadControl from '../molecules/ImageUploadControl.vue';
+import ImageUploadControl from '@/components/molecules/ImageUploadControl.vue';
 
 export default defineComponent({
   components: {

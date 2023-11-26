@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import HomePage from './pages/HomePage'
+import HomePage from '@/pages/HomePage'
 
 export default {
   name: 'App',
@@ -18,6 +18,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 </style>
