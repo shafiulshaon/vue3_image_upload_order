@@ -1,24 +1,50 @@
-# vue3_image_upload_order
 
-## Project setup
-```
-npm install
-```
+# 画像アップロードと表⽰順登録
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 説明
 
-### Compiles and minifies for production
-```
-npm run build
-```
+この Vue.js アプリケーションは、画像のアップロード、プレビュー、および表示順を登録するユーザーフレンドリーなインターフェースを提供します。Vue 3のコンポジションAPIを利用し、アトミックデザイン原則に沿ってモジュール性とスケーラビリティのあるアーキテクチャを実現しています。主な機能には、画像の並べ替え、ファイルタイプとサイズの検証、保存、およびエラー処理が含まれます。
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 機能
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- **画像アップロード**: ユーザーは一度に複数の画像をアップロードし、即時プレビューを見ることができます。
+- **並べ替え**: 各画像の設定メニューまたはシンプルなドラッグアンドドロップインターフェースを使用して画像を並べ替えることができます。
+- **ファイル検証**: アプリはファイルタイプとサイズ（画像あたり最大20MB）を検証し、適切な画像アップロードを保証します。
+- **エラー処理**: インタラクティブなモーダルは、無効なファイルタイプやサイズに関するフィードバックを提供します。
+- **画像の保存**: アップロードされた画像はAPIを通じて並べ替えた順序で保存することができます。
+
+## インストール
+
+プロジェクトをローカルで設定するには、以下の手順に従ってください：
+
+1. **リポジトリのクローン**
+
+   ```sh
+   git clone https://github.com/shafiulshaon/vue3_image_upload_order.git
+   cd vue3_image_upload_order
+   ```
+
+2. **依存関係のインストール**
+
+   ```sh
+   npm install
+   ```
+
+3. **アプリケーションの実行**
+
+   ```sh
+   npm run serve
+   ```
+
+   アプリケーションは `http://localhost:8080` で利用可能です。
+
+## 使用法
+
+- **画像のアップロード**: 「ファイルを選択する」ボタンをクリックし、1つ以上の画像を選択します。
+- **画像の削除**: 画像上の「設定」ボタンをクリックし、左へ移動を選択して画像を左に移動、右へ移動を選択して画像を右に移動、または「画像を削除」を選択して画像を削除します。
+- **ドラッグアンドドロップ**: 画像をドラッグしてドロップし、順序を並べ替えます。
+
+## 連絡先情報
+
+- 名前: [Shafiul Alam](shafiulshaon@gmail.com)
+- プロジェクトリンク: [GitHub Repository](https://github.com/shafiulshaon/vue3_image_upload_order)
