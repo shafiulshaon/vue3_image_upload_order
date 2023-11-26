@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <input type="file" multiple @change="handleFileUpload" />
-    <div v-if="images.length">
-      <ImageUploadControl
+  <div v-if="images.length" class="container">
+    <ImageUploadControl
       v-for="(image, index) in images"
       :key="index"
       :image="image"
@@ -12,9 +10,14 @@
       @remove="removeImage"
       @reorder="reorderImages"
     />
-    </div>
-    <button @click="uploadImages">Upload</button>
   </div>
+  <label for="file-upload" class="custom-file-upload">
+    <img class="icon" src="~@/assets/images/upload-file.svg">
+    ファイルを選択する
+  </label>
+  <input id="file-upload" type="file" multiple @change="handleFileUpload" >
+
+  <button v-if="images.length" class="upload-btn" @click="uploadImages">保存</button>
 </template>
 
 <script>
@@ -111,4 +114,41 @@ export default defineComponent({
 });
 </script>
 
-<!-- styles for the uploader -->
+<style scoped>
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 10px;
+}
+.icon {
+  width: 15px;
+  padding-right: 5px;
+}
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.8em;
+  border-radius: 4px;
+  border: 2px solid #a5a5a5;
+  background-color: #e3e3e3;
+  margin: 20px;
+}
+
+.upload-btn {
+  width: 50%;
+  align-self: center;
+  height: 35px;
+  color: white;
+  background-color: #05d5ac;
+  border: none;
+  margin-top: 35px;
+}
+</style>
