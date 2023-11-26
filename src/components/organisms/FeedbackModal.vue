@@ -3,7 +3,7 @@
     <div v-if="loading">
       <LoadingSpinner />
     </div>
-    <div v-else>
+    <div class="content" v-else>
       <p>{{ message }}</p>
       <button class="close-btn" @click="close">閉じる</button>
     </div>
@@ -35,4 +35,10 @@ export default {
 </script>
 
 <style scoped>
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+}
 </style>

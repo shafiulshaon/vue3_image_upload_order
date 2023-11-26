@@ -49,9 +49,7 @@ input[type="file"] {
 }
 
 .close-btn {
-  width: 60px;
-  display: flex;
-  justify-content: center;
+  width: 80px;
   cursor: pointer;
   font-size: 0.8em;
   border-radius: 4px;
