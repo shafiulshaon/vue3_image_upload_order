@@ -18,7 +18,7 @@ graph TD
     B -->|含む| F[画像アップロードコントロール]
     B -->|含む| G[画像プレビュー]
     B -->|含む| H[フィードバックモーダル]
-    C -->|アイコン＆スタイル| I[アイコンとスタイル]
+    C -->|アイコンやスタイル| I[アイコンとスタイル]
     D -->|APIエンドポイント| J[画像アップロードエンドポイント]
 ```
 
@@ -38,7 +38,6 @@ graph TD
     ImageUploader --> FeedbackModal[FeedbackModal.vue]
     FeedbackModal --> Modal[Modal.vue]
     FeedbackModal --> LoadingSpinner[LoadingSpinner.vue]
-    style App fill:#f9f,stroke:#333,stroke-width:2px
 ```
 
 ## データフロー図
@@ -47,10 +46,10 @@ graph TD
 
 ```mermaid
 graph LR
-    A[ユーザーが画像を選択] -->|画像選択| B[画像の検証＆プレビュー]
+    A[ユーザーが画像を選択] -->|画像選択| B[画像の検証とプレビュー]
     B -->|並べ替え/削除| C[ユーザーが画像を編集]
     C -->|画像を送信| D[画像がアップロードされる]
-    D -->|成功/エラーフィードバック| E[フィードバックモーダル]
+    D -->|成功やエラーフィードバック| E[フィードバックモーダル]
 ```
 
 ---
