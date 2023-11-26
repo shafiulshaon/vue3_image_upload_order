@@ -1,7 +1,5 @@
 <template>
-  <div className="image-preview">
-    <img :src="image.url" :alt="altText"/>
-  </div>
+  <img class="img-preview" :src="image.url" :alt="altText"/>
 </template>
 
 <script>
@@ -27,8 +25,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.image-preview img {
-  max-width: 100px;
-  margin: 5px;
+.img-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  display: block;
 }
 </style>
