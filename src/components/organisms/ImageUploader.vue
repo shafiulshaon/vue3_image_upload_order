@@ -19,12 +19,18 @@
   <input id="file-upload" type="file" multiple @change="handleFileUpload" >
 
   <Button v-if="images.length" class="upload-btn" @click="uploadImages" title="保存"/>
-
+  <FeedbackModal
+    :show="showModal"
+    :loading="loading"
+    :message="feedbackMessage"
+    @close="showModal = false"
+  />
 </template>
 
 <script>
 import {ref, defineComponent, onBeforeUnmount} from 'vue';
 import ImageUploadControl from '@/components/molecules/ImageUploadControl.vue';
+import FeedbackModal from '@/components/organisms/FeedbackModal.vue';
 import Button from '@/components/atoms/Button.vue';
 import { uploadFileIcon } from '@/assets/icons';
 
@@ -32,11 +38,15 @@ export default defineComponent({
   name: 'ImageUploader',
   components: {
     ImageUploadControl,
+    FeedbackModal,
     Button
   },
   setup() {
     const images = ref([]);
     const openMenuIndex = ref(-1);
+    const showModal = ref(false);
+    const loading = ref(false);
+    const feedbackMessage = ref('');
 
     const toggleMenu = (index) => {
       if (openMenuIndex.value === index) {
@@ -74,6 +84,8 @@ export default defineComponent({
     };
 
     const uploadImages = async () => {
+      loading.value = true;
+      showModal.value = true;
       try {
         // sending the images as FormData
         const formData = new FormData();
@@ -88,11 +100,12 @@ export default defineComponent({
         });
 
         const result = await response.json();
-        // Handle the response data
+        feedbackMessage.value = '保存しました';
         console.log(result);
       } catch (error) {
-        // Handle any errors, such as by displaying a user-friendly message
-        console.error('Upload failed:', error);
+        feedbackMessage.value = '失敗しました。: ' + error.message;
+      } finally {
+        loading.value = false;
       }
     };
 
@@ -124,6 +137,9 @@ export default defineComponent({
       reorderImages,
       uploadImages,
       moveImage,
+      showModal,
+      loading,
+      feedbackMessage,
       uploadFileIcon
     };
   }
