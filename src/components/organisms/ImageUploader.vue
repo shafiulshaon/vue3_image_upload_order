@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import {ref, defineComponent, onBeforeUnmount} from 'vue';
-import ImageUploadControl from '@/components/molecules/ImageUploadControl.vue';
-import FeedbackModal from '@/components/organisms/FeedbackModal.vue';
-import Button from '@/components/atoms/Button.vue';
-import { uploadFileIcon } from '@/assets/icons';
+import {ref, defineComponent, onBeforeUnmount} from 'vue'
+import ImageUploadControl from '@/components/molecules/ImageUploadControl.vue'
+import FeedbackModal from '@/components/organisms/FeedbackModal.vue'
+import Button from '@/components/atoms/Button.vue'
+import { uploadFileIcon } from '@/assets/icons'
 
 export default defineComponent({
   name: 'ImageUploader',
@@ -42,91 +42,91 @@ export default defineComponent({
     Button
   },
   setup() {
-    const images = ref([]);
-    const openMenuIndex = ref(-1);
-    const showModal = ref(false);
-    const loading = ref(false);
-    const feedbackMessage = ref('');
+    const images = ref([])
+    const openMenuIndex = ref(-1)
+    const showModal = ref(false)
+    const loading = ref(false)
+    const feedbackMessage = ref('')
 
     const toggleMenu = (index) => {
       if (openMenuIndex.value === index) {
-        openMenuIndex.value = -1; // Close the menu if it's already open
+        openMenuIndex.value = -1 // Close the menu if it's already open
       } else {
-        openMenuIndex.value = index; // Open the new menu
-        window.addEventListener('click', closeMenu);
+        openMenuIndex.value = index // Open the new menu
+        window.addEventListener('click', closeMenu)
       }
-    };
+    }
 
     const closeMenu = (event) => {
       if (!event.target.matches('.settings-button')) {
-        openMenuIndex.value = -1;
-        window.removeEventListener('click', closeMenu);
+        openMenuIndex.value = -1
+        window.removeEventListener('click', closeMenu)
       }
-    };
+    }
 
     const handleFileUpload = (event) => {
-      const files = Array.from(event.target.files).filter(file => file.type.startsWith('image/'));
+      const files = Array.from(event.target.files).filter(file => file.type.startsWith('image/'))
 
       if (files.length === 0) {
         // No images selected, show an error message
-        return;
+        return
       }
 
       images.value.push(...files.map(file => ({
         url: URL.createObjectURL(file),
         file: file
-      })));
-    };
+      })))
+    }
 
 
     const removeImage = (index) => {
-      images.value.splice(index, 1);
-    };
+      images.value.splice(index, 1)
+    }
 
     const uploadImages = async () => {
-      loading.value = true;
-      showModal.value = true;
+      loading.value = true
+      showModal.value = true
       try {
         // sending the images as FormData
-        const formData = new FormData();
+        const formData = new FormData()
         images.value.forEach((image, index) => {
-          formData.append(`images[${index}]`, image.file, image.file.name);
-        });
+          formData.append(`images[${index}]`, image.file, image.file.name)
+        })
 
         // Update the URL with API endpoint
         const response = await fetch('https://httpbin.org/anything', {
           method: 'POST',
           body: formData,
-        });
+        })
 
-        const result = await response.json();
-        feedbackMessage.value = '保存しました';
-        console.log(result);
+        const result = await response.json()
+        feedbackMessage.value = '保存しました'
+        console.log(result)
       } catch (error) {
-        feedbackMessage.value = '失敗しました。: ' + error.message;
+        feedbackMessage.value = '失敗しました。: ' + error.message
       } finally {
-        loading.value = false;
+        loading.value = false
       }
-    };
+    }
 
 
     const reorderImages = ({ originIndex, targetIndex }) => {
-      const origin = images.value[originIndex];
-      images.value.splice(originIndex, 1);
-      images.value.splice(targetIndex, 0, origin);
-    };
+      const origin = images.value[originIndex]
+      images.value.splice(originIndex, 1)
+      images.value.splice(targetIndex, 0, origin)
+    }
 
     onBeforeUnmount(() => {
-      images.value.forEach(image => URL.revokeObjectURL(image.url));
-    });
+      images.value.forEach(image => URL.revokeObjectURL(image.url))
+    })
 
     const moveImage = ({ index, direction }) => {
-      const newPosition = direction === 'left' ? index - 1 : index + 1;
+      const newPosition = direction === 'left' ? index - 1 : index + 1
       if (newPosition >= 0 && newPosition < images.value.length) {
-        const itemToMove = images.value.splice(index, 1)[0];
-        images.value.splice(newPosition, 0, itemToMove);
+        const itemToMove = images.value.splice(index, 1)[0]
+        images.value.splice(newPosition, 0, itemToMove)
       }
-    };
+    }
 
     return {
       images,
@@ -141,9 +141,9 @@ export default defineComponent({
       loading,
       feedbackMessage,
       uploadFileIcon
-    };
+    }
   }
-});
+})
 </script>
 
 <style scoped>
@@ -151,36 +151,10 @@ export default defineComponent({
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin: 0 auto;
   padding: 10px;
 }
 .icon {
   width: 15px;
   padding-right: 5px;
-}
-input[type="file"] {
-  display: none;
-}
-.custom-file-upload {
-  width: 140px;
-  display: flex;
-  justify-content: center;
-  padding: 2px 6px;
-  cursor: pointer;
-  font-size: 0.8em;
-  border-radius: 4px;
-  border: 2px solid #a5a5a5;
-  background-color: #e3e3e3;
-  margin: 20px;
-}
-
-.upload-btn {
-  width: 50%;
-  align-self: center;
-  height: 35px;
-  color: white;
-  background-color: #05d5ac;
-  border: none;
-  margin-top: 35px;
 }
 </style>

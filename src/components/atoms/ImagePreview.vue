@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {defineComponent, computed} from 'vue';
+import {defineComponent} from 'vue'
 
 export default defineComponent({
   props: {
@@ -16,12 +16,7 @@ export default defineComponent({
       default: 'Uploaded image'
     }
   },
-  setup(props) {
-    const altTexts = computed(() => props.altText);
-
-    return { altTexts };
-  }
-});
+})
 </script>
 
 <style scoped>
