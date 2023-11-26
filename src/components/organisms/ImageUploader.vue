@@ -8,6 +8,7 @@
       :is-open="openMenuIndex === index"
       @toggle-menu="toggleMenu"
       @remove="removeImage"
+      @move="moveImage"
       @reorder="reorderImages"
     />
   </div>
@@ -101,6 +102,14 @@ export default defineComponent({
       images.value.forEach(image => URL.revokeObjectURL(image.url));
     });
 
+    const moveImage = ({ index, direction }) => {
+      const newPosition = direction === 'left' ? index - 1 : index + 1;
+      if (newPosition >= 0 && newPosition < images.value.length) {
+        const itemToMove = images.value.splice(index, 1)[0];
+        images.value.splice(newPosition, 0, itemToMove);
+      }
+    };
+
     return {
       images,
       openMenuIndex,
@@ -108,7 +117,8 @@ export default defineComponent({
       handleFileUpload,
       removeImage,
       reorderImages,
-      uploadImages
+      uploadImages,
+      moveImage
     };
   }
 });
