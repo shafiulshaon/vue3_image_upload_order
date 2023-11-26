@@ -2,21 +2,17 @@
   <div @dragover.prevent @drop="drop" draggable="true" @dragstart="dragStart">
     <div class="product">
       <ImagePreview :image="image" :alt-text="`Image ${index}`" />
-      <button class="settings-button" @click.stop="toggleMenu">設定</button>
-
+      <Button class="settings-button" @click.stop="toggleMenu" title="設定"/>
       <div class="product-menu" v-if="isOpen">
-        <button @click="emitMove('left')">
-          <img class="icon" src="~@/assets/images/left-arrow.png">
-          左へ移動
-        </button>
-        <button @click="emitMove('right')">
-          <img class="icon" src="~@/assets/images/right-arrow.png">
-          右へ移動
-        </button>
-        <button class="warning" @click="emitRemove">
-          <img class="icon" src="~@/assets/images/delete.svg">
-          画像を削除
-        </button>
+        <Button @click="emitMove('left')" title="左へ移動">
+          <img class="icon" :src="leftArrowIcon">
+        </Button>
+        <Button @click="emitMove('right')" title="右へ移動">
+          <img class="icon" :src="rightArrowIcon">
+        </Button>
+        <Button class="warning" @click="emitRemove" title="画像を削除">
+          <img class="icon" :src="deleteIcon">
+        </Button>
       </div>
     </div>
   </div>
@@ -25,10 +21,13 @@
 <script>
 import {defineComponent} from 'vue';
 import ImagePreview from '@/components/atoms/ImagePreview.vue';
+import Button from '@/components/atoms/Button.vue';
+import { leftArrowIcon, rightArrowIcon, deleteIcon } from '@/assets/icons';
 
 export default defineComponent({
   components: {
-    ImagePreview
+    ImagePreview,
+    Button
   },
   props: {
     image: {
@@ -72,7 +71,7 @@ export default defineComponent({
       }
     };
 
-    return { toggleMenu, emitMove, emitRemove, dragStart, drop };
+    return { toggleMenu, emitMove, emitRemove, dragStart, drop, leftArrowIcon, rightArrowIcon, deleteIcon };
   }
 });
 </script>

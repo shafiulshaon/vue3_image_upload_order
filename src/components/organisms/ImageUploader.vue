@@ -13,21 +13,26 @@
     />
   </div>
   <label for="file-upload" class="custom-file-upload">
-    <img class="icon" src="~@/assets/images/upload-file.svg">
+    <img class="icon" :src="uploadFileIcon">
     ファイルを選択する
   </label>
   <input id="file-upload" type="file" multiple @change="handleFileUpload" >
 
-  <button v-if="images.length" class="upload-btn" @click="uploadImages">保存</button>
+  <Button v-if="images.length" class="upload-btn" @click="uploadImages" title="保存"/>
+
 </template>
 
 <script>
 import {ref, defineComponent, onBeforeUnmount} from 'vue';
 import ImageUploadControl from '@/components/molecules/ImageUploadControl.vue';
+import Button from '@/components/atoms/Button.vue';
+import { uploadFileIcon } from '@/assets/icons';
 
 export default defineComponent({
+  name: 'ImageUploader',
   components: {
-    ImageUploadControl
+    ImageUploadControl,
+    Button
   },
   setup() {
     const images = ref([]);
@@ -118,7 +123,8 @@ export default defineComponent({
       removeImage,
       reorderImages,
       uploadImages,
-      moveImage
+      moveImage,
+      uploadFileIcon
     };
   }
 });
