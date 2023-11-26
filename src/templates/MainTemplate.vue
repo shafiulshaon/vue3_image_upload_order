@@ -4,8 +4,10 @@
       <!-- header content -->
     </header>
     <main>
-      <!-- Slot for main content -->
-      <slot></slot>
+      <Aside />
+      <section>
+          <slot></slot>
+      </section>
     </main>
     <footer>
       <!-- footer content -->
@@ -14,9 +16,14 @@
 </template>
 
 <script>
-export default {
-  name: 'MainTemplate'
-}
+import Aside from "@/components/organisms/aside/index";
+import {defineComponent} from "vue";
+export default defineComponent({
+  name: 'MainTemplate',
+  components: {
+    Aside
+  },
+})
 </script>
 
 <style scoped>
@@ -24,9 +31,17 @@ export default {
   /* header styles */
 }
 .main-template main {
-  /* main content styles */
-  padding: 20px;
-  text-align: left;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  min-width: calc(100vw - 20px);
+}
+
+.main-template section {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 120px);
+  width: 75%;
 }
 .main-template footer {
   /* footer styles */
