@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Modal from '@/components/atoms/Modal.vue';
-import LoadingSpinner from '@/components/atoms/LoadingSpinner.vue';
+import Modal from '@/components/atoms/Modal.vue'
+import LoadingSpinner from '@/components/atoms/LoadingSpinner.vue'
 
 export default {
   name: 'FeedbackModal',
@@ -28,10 +28,10 @@ export default {
   emits: ['close'],
   methods: {
     close() {
-      this.$emit('close');
+      this.$emit('close')
     }
   }
-};
+}
 </script>
 
 <style scoped>

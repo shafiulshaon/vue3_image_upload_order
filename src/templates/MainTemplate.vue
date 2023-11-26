@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Aside from "@/components/organisms/aside/index";
-import {defineComponent} from "vue";
+import Aside from "@/components/organisms/aside/index"
+import {defineComponent} from "vue"
 export default defineComponent({
   name: 'MainTemplate',
   components: {

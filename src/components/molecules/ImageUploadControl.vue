@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import {defineComponent} from 'vue';
-import ImagePreview from '@/components/atoms/ImagePreview.vue';
-import Button from '@/components/atoms/Button.vue';
-import { leftArrowIcon, rightArrowIcon, deleteIcon } from '@/assets/icons';
+import {defineComponent} from 'vue'
+import ImagePreview from '@/components/atoms/ImagePreview.vue'
+import Button from '@/components/atoms/Button.vue'
+import { leftArrowIcon, rightArrowIcon, deleteIcon } from '@/assets/icons'
 
 export default defineComponent({
   components: {
@@ -47,33 +47,33 @@ export default defineComponent({
   setup(props, { emit }) {
 
     const toggleMenu = () => {
-      emit('toggle-menu', props.index);
-    };
+      emit('toggle-menu', props.index)
+    }
 
     const emitMove = (direction) => {
-      emit('move', { index: props.index, direction });
-    };
+      emit('move', { index: props.index, direction })
+    }
 
     const emitRemove = () => {
-      emit('remove', props.index);
-    };
+      emit('remove', props.index)
+    }
 
     const dragStart = (event) => {
-      event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.setData('application/vnd.myapp.index', props.index);
-    };
+      event.dataTransfer.effectAllowed = 'move'
+      event.dataTransfer.setData('application/vnd.myapp.index', props.index)
+    }
 
     const drop = (event) => {
-      const originIndex = event.dataTransfer.getData('application/vnd.myapp.index');
-      const targetIndex = props.index;
+      const originIndex = event.dataTransfer.getData('application/vnd.myapp.index')
+      const targetIndex = props.index
       if (originIndex !== targetIndex.toString()) {
-        emit('reorder', { originIndex, targetIndex });
+        emit('reorder', { originIndex, targetIndex })
       }
-    };
+    }
 
-    return { toggleMenu, emitMove, emitRemove, dragStart, drop, leftArrowIcon, rightArrowIcon, deleteIcon };
+    return { toggleMenu, emitMove, emitRemove, dragStart, drop, leftArrowIcon, rightArrowIcon, deleteIcon }
   }
-});
+})
 </script>
 
 <style scoped>

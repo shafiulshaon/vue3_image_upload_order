@@ -18,10 +18,10 @@ export default {
   emits: ['click'],
   methods: {
     onClick(event) {
-      this.$emit('click', event);
+      this.$emit('click', event)
     }
   }
-};
+}
 </script>
 
 <style scoped>

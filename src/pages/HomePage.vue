@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import MainTemplate from '@/templates/MainTemplate.vue';
-import ImageUploader from '@/components/organisms/ImageUploader.vue';
+import MainTemplate from '@/templates/MainTemplate.vue'
+import ImageUploader from '@/components/organisms/ImageUploader.vue'
 
 export default {
   name: 'HomePage',
