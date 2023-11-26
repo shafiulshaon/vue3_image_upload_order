@@ -7,6 +7,8 @@
       :key="index"
       :image="image"
       :index="index"
+      :is-open="openMenuIndex === index"
+      @toggle-menu="toggleMenu"
       @remove="removeImage"
       @reorder="reorderImages"
     />
@@ -25,6 +27,23 @@ export default defineComponent({
   },
   setup() {
     const images = ref([]);
+    const openMenuIndex = ref(-1);
+
+    const toggleMenu = (index) => {
+      if (openMenuIndex.value === index) {
+        openMenuIndex.value = -1; // Close the menu if it's already open
+      } else {
+        openMenuIndex.value = index; // Open the new menu
+        window.addEventListener('click', closeMenu);
+      }
+    };
+
+    const closeMenu = (event) => {
+      if (!event.target.matches('.settings-button')) {
+        openMenuIndex.value = -1;
+        window.removeEventListener('click', closeMenu);
+      }
+    };
 
     const handleFileUpload = (event) => {
       const files = Array.from(event.target.files).filter(file => file.type.startsWith('image/'));
@@ -81,6 +100,8 @@ export default defineComponent({
 
     return {
       images,
+      openMenuIndex,
+      toggleMenu,
       handleFileUpload,
       removeImage,
       reorderImages,

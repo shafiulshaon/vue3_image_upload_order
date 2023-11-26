@@ -38,10 +38,27 @@ export default defineComponent({
     index: {
       type: Number,
       required: true
-    }
+    },
+    isOpen: {
+      type: Boolean,
+      required: true
+    },
   },
-  emits: ['remove', 'reorder'],
+  emits: ['toggle-menu', 'remove', 'move', 'reorder'],
   setup(props, { emit }) {
+
+    const toggleMenu = () => {
+      emit('toggle-menu', props.index);
+    };
+
+    const emitMove = (direction) => {
+      emit('move', { index: props.index, direction });
+    };
+
+    const emitRemove = () => {
+      emit('remove', props.index);
+    };
+
     const dragStart = (event) => {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setData('application/vnd.myapp.index', props.index);
@@ -55,11 +72,7 @@ export default defineComponent({
       }
     };
 
-    const emitRemove = () => {
-      emit('remove', props.index);
-    };
-
-    return { emitRemove, dragStart, drop };
+    return { toggleMenu, emitMove, emitRemove, dragStart, drop };
   }
 });
 </script>
