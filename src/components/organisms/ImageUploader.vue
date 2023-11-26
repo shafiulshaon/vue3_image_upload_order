@@ -65,11 +65,20 @@ export default defineComponent({
     }
 
     const handleFileUpload = (event) => {
-      const files = Array.from(event.target.files).filter(file => file.type.startsWith('image/'))
+      const files = Array.from(event.target.files)
+      const maxSize = 20 * 1024 * 1024 // 最大20MB
 
-      if (files.length === 0) {
-        // No images selected, show an error message
-        return
+      for (let file of files) {
+        if (!file.type.startsWith('image/')) {
+          feedbackMessage.value = '無効なファイルタイプです。 画像を選択してください。'
+          showModal.value = true
+          return
+        }
+        if (file.size > maxSize) {
+          feedbackMessage.value = 'ファイルサイズが20MBを超えています。'
+          showModal.value = true
+          return
+        }
       }
 
       images.value.push(...files.map(file => ({
@@ -77,7 +86,6 @@ export default defineComponent({
         file: file
       })))
     }
-
 
     const removeImage = (index) => {
       images.value.splice(index, 1)
@@ -100,7 +108,7 @@ export default defineComponent({
         })
 
         const result = await response.json()
-        feedbackMessage.value = '保存しました'
+        feedbackMessage.value = '保存しました。'
         console.log(result)
       } catch (error) {
         feedbackMessage.value = '失敗しました。: ' + error.message
